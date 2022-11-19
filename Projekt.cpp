@@ -8,14 +8,13 @@ using namespace std;
 
 int main()
 {
-	printf("hi");
 
-	printf("cc");
-	char abc[10] = { 'ccc' };
+	char abc[4] = "ccc";
 
 	
 	int data = 5;
-	printf("-------------------------\n");
+	printf("_________\n");
 		printf("|%s|%s|%s|", abc, abc, abc);
+		printf("---------");
 	return 0;
 }
