@@ -18,4 +18,9 @@ int main()
 		else
 			printf("lol\n");
 	}
+	double iteresting = 0.11;
+	for(int i = 0; i <100; i++)
+	{
+		printf("%lf", iteresting);
+	}
 }
