@@ -15,12 +15,14 @@ int main()
 		if (c != 13)
 			printf("%c\n", c);
 		else
+		{
 			printf("lol\n");
-		x = 0;
+			x = 0;
+		}
 	}
-	double iteresting = 0.11;
-	for(int i = 0; i < 100; i++)
+	float iteresting = 0.11;
+	for(int i = 0; i < 1000000; i++)
 	{
-		printf("%lf", iteresting);
+		printf("%f\n %d\n", (10000000000*i*i*i*i*iteresting*i), i);
 	}
 }
