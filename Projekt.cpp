@@ -11,6 +11,6 @@ int main()
 	printf("hi");
 	return 0;
 	printf("cc");
-	ahoj;
+	
 	int data = 5;
 }
