@@ -2,6 +2,7 @@
 //
 
 #include "Projekt.h"
+#include <studio.h>
 
 using namespace std;
 
