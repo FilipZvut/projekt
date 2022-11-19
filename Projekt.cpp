@@ -13,8 +13,11 @@ int main()
 
 	
 	int data = 5;
-	printf("_________\n");
-		printf("|%s|%s|%s|", abc, abc, abc);
-		printf("---------");
+	printf(" ___________\n");
+		printf("|%s|%s|%s|\n", abc, abc, abc);
+		printf("|%s|%s|%s|\n", abc, abc, abc);
+		printf("|%s|%s|%s|\n", abc, abc, abc);
+		printf("|%s|%s|%s|\n", abc, abc, abc);
+		printf("|%s|%s|%s|\n", abc, abc, abc);
 	return 0;
 }
