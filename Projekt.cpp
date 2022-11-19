@@ -12,5 +12,5 @@ int main()
 	return 0;
 	printf("cc");
 	ahoj;
-	int data = 0;
+	int data = 5;
 }
