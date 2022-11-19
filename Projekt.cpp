@@ -1,5 +1,4 @@
-﻿// Projekt.cpp: Definuje vstupní bod pro aplikaci.
-//
+﻿
 
 #include "Projekt.h"
 #include <conio.h>
@@ -17,9 +16,10 @@ int main()
 			printf("%c\n", c);
 		else
 			printf("lol\n");
+		x = 0;
 	}
 	double iteresting = 0.11;
-	for(int i = 0; i <100; i++)
+	for(int i = 0; i < 100; i++)
 	{
 		printf("%lf", iteresting);
 	}
