@@ -1,6 +1,6 @@
 ﻿// Projekt.cpp: Definuje vstupní bod pro aplikaci.
 //
-#incl
+
 #include "Projekt.h"
 #include <conio.h>
 #include <windows.h>
@@ -12,10 +12,10 @@ int main()
 	while (x == 1)
 	{
 		int c = 122;
-		//c = getch();
+		c = getch();
 		if (c != 13)
-			printf("%c", c);
+			printf("%c\n", c);
 		else
-			printf("lol");
+			printf("lol\n");
 	}
 }
