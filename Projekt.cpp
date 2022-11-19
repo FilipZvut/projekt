@@ -2,14 +2,14 @@
 //
 
 #include "Projekt.h"
-
+#include <conio.h>
 
 using namespace std;
 
 int main()
 {
-	
-	return 0;
 	printf("hi");
-	cdcd
+	return 0;
+	
+	
 }
