@@ -12,4 +12,5 @@ int main()
 	return 0;
 	printf("cc");
 	ahoj;
+	int data = 0;
 }
