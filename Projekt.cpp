@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
                 }
                 p++;
             }
-            _ls('.', op_a, op_l);
+            _ls(".", op_a, op_l);
         }
     }
 
