@@ -3,9 +3,12 @@
 #include <stdio.h> 
 #include <errno.h>
 #include <stdlib.h>
-
+//https://iq.opengenus.org/ls-command-in-c/     //okomentovat kod
+//
+char test[1500];
 void _ls(const char *dir,  int op_a, int op_l)
 {
+    dir = "C:\\Users\\zadni\\Desktop\\code\\projekt";
     struct dirent *d;
     DIR *dh = opendir(dir);
     if(!dh)
@@ -23,7 +26,14 @@ void _ls(const char *dir,  int op_a, int op_l)
     {
         if(!op_a && d->d_name[0] == '.')
             continue;
-        printf("%s", d->d_name);
+        printf("%s\n", d->d_name);
+        for(int i = 0; i <150; i++)
+        {
+            if (test[i] == '.')
+                i += 3;
+            test[i];
+        }   
+
         if(op_l) printf("\n");
     }
     if(!op_l)
