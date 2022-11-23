@@ -1,11 +1,9 @@
 ﻿// test projekt.cpp: Definuje vstupní bod pro aplikaci.
 //
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "projekt.h"
 #include <conio.h>
-#include <iostream>
+
 void add();
 void show();
 void menu();
