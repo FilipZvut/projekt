@@ -1,21 +1,30 @@
 ﻿// test projekt.cpp: Definuje vstupní bod pro aplikaci.
 //
 #include <stdio.h>
-#include "projekt.h"
+
+#include "Projekt.h"
 #include <conio.h>
+#include <Windows.h>
+#pragma warning(disable:4996)//proti warning
+
+int poradi = 0; //:(
 
 void add();
-void show();
+void show(int stop);
 void menu();
 void vybrat();
+void zapisdopromene();
+void del();
 using namespace std;
 
 
 typedef struct {
-    char nazev[100];
-    char misto[100];
-    char cena[20];
+    char nazev[30];
+    char misto[30];
+    char cena[30];
 }ZAMEK;
+
+ZAMEK zamky[500];
 
 enum menu { nic, zobrazit, pridat, upravit, vymazat };
 enum menu operace;
@@ -24,6 +33,7 @@ enum menu operace;
 int main() {
 
     do {
+        zapisdopromene();   //asi se bude provádět pokaždý uvidíme
         menu();
         vybrat();
 
@@ -35,50 +45,53 @@ int main() {
 
 void add()
 {
-    ZAMEK zamky[50];
+
+    ZAMEK pridat[50];
     int a = 0;
     int pocet = 0;
     char dalsi;
 
     do {
-
+        system("cls");
         printf("Zadejte nazev: ");
-        scanf("%s", zamky[a].nazev);
+        scanf("%s", pridat[a].nazev);
         printf("Zadejte lokaci: ");
-        scanf("%s", zamky[a].misto);
+        scanf("%s", pridat[a].misto);
         printf("Zadejte cenu vstupu: ");
-        scanf("%s", zamky[a].cena);
+        scanf("%s", pridat[a].cena);
         a++;
         pocet++;
-        printf("Budete chtit pridat dalsi zamek? [a/n]");
-        dalsi = getch();
+        printf("Budete chtit pridat dalsi zamek? [a/n]\n");
+        dalsi = getche();
         system("cls");
 
     } while (dalsi == 'a');
     ;
     FILE* wrt;
-    wrt = fopen("C:\\Users\\zadni\\Desktop\\code\\projekt\\test.txt", "a");
+    wrt = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "a");
     for (int a = 0; a < pocet; a++) {
-        fprintf(wrt, "%s,    %s,     %s\n", zamky[a].nazev, zamky[a].misto, zamky[a].cena);
+        fprintf(wrt, "%s,%s,%s*\n", pridat[a].nazev, pridat[a].misto, pridat[a].cena);
     }
     fclose(wrt);
 
 
 }
 
-void show() {
+void show(int stop) {
 
-    FILE* read;
-    read = fopen("C:\\Users\\zadni\\Desktop\\code\\projekt\\test.txt", "r");
     system("cls");
     printf("Nazev,    Lokace,    vstupne\n-------------------------------\n");
+    for (int poradi1 = 0; poradi1 < poradi; poradi1++) {
 
-    char c;
-    while ((c = fgetc(read)) != EOF)
-        if (c != '*')
-            printf("%c", c);
-    fclose(read);
-    getch();
+
+        printf("%s,", zamky[poradi1].nazev);
+        printf("%s,", zamky[poradi1].misto);
+        printf("%s", zamky[poradi1].cena);
+
+    }
+    if (stop)
+        getche();
+
 }
 
 void menu() {
@@ -98,100 +111,71 @@ void vybrat() {
 
     do {
         switch (operace) {
-        case zobrazit: show();
+        case zobrazit: show(1);
             break;
         case pridat: add();
             break;
+        case vymazat: del();
+            break;
         default:system("cls");
             printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu.");
-            scanf("%d", (&operace - 1));
+            Sleep(2000);
+            menu();
             break;
         }
-    } while (operace < 0 || operace>3);
+    } while (operace < 0 || operace>4);
 
 
 }
 
 
+void zapisdopromene()
+{
+    poradi = 0;
+    int typ = 0;
+    int a = 0;
+    char c;
 
-//#include "Projekt.h"
-//#include <dirent.h>
-//#include <stdio.h> 
-//#include <errno.h>
-//#include <stdlib.h>
-//#include "funkce.cpp"
-//
-////https://iq.opengenus.org/ls-command-in-c/     //okomentovat kod
-////
-//char test[1500];
-//void _ls(const char *dir,  int op_a, int op_l)
-//{
-//    dir = "C:\\Users\\zadni\\Desktop\\code\\projekt\\da";
-//    struct dirent *d;
-//    DIR *dh = opendir(dir);
-//    if(!dh)
-//    {
-//        if(errno = ENOENT)
-//        {
-//            perror("Slozka neexistuje");
-//        }
-//        else
-//        {
-//            perror("Nelze precist slozku.");
-//        }
-//    }
-//    while ((d = readdir(dh)) != NULL)
-//    {
-//        if(!op_a && d->d_name[0] == '.')
-//            continue;
-//        //printf("%s\n", d->d_name);
-//     char *tuktuk = strtok(d->d_name, ".txt");
-//        while(tuktuk != NULL)
-//        {
-//            printf("%s\n", tuktuk);
-//
-//            tuktuk = strtok(NULL, ".txt");
-//        }
-//        //for(int i = 0; i <150; i++)
-//        //{
-//        //    if (test[i] == '.')
-//        //        i += 3;
-//        //    test[i];
-//        //}   
-//
-//        if(op_l) printf("\n");
-//    }
-//    if(!op_l)
-//    printf("\n");
-//
-//}
-//int main(int argc, char* argv[])
-//{
-// 
-//    if (argc == 1)
-//    {
-//        _ls(".", 0, 0);
-//    }
-//    else if(argc == 2)
-//    {
-//        if(argv[1][0] == '-')
-//        {
-//            int op_a = 0, op_l = 0;
-//            char *p = (char*)(argv[1] + 1);
-//            while(*p)
-//            {
-//                if(*p == 'a') op_a = 1;
-//                else if(*p == '1') op_l = 1;
-//                else
-//                {
-//                    perror("Neexistuje kokote.");   
-//                    exit(EXIT_FAILURE);
-//                }
-//                p++;
-//            }
-//            _ls(".", op_a, op_l);
-//        }
-//    }
-//
-//    return 0;
-//}
+
+    FILE* rd;
+    rd = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "r");
+
+    while ((c = fgetc(rd)) != EOF)
+        if (c != '*')
+        {
+            if (c != ',') {
+                if (typ == 0)
+                    zamky[poradi].nazev[a] = c;
+                if (typ == 1)
+                    zamky[poradi].misto[a] = c;
+                if (typ == 2)
+                    zamky[poradi].cena[a] = c;
+
+                a++;
+            }
+            else {
+                if (typ == 0)
+                    zamky[poradi].nazev[a] = '\0';
+                if (typ == 1)
+                    zamky[poradi].misto[a] = '\0';
+
+                a = 0;
+                typ++;
+            }
+        }
+        else {
+            zamky[poradi].cena[a] = '\0';
+            a = 0;
+            typ = 0;
+            poradi++;
+        }
+
+    fclose(rd);
+
+}
+
+void del()
+{
+    show(0);
+    printf("Zadej cislo radku ktery chcete smazat:");
+}
