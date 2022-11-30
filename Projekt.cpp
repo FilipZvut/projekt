@@ -174,8 +174,19 @@ void zapisdopromene()
 
 }
 
-void del()
+void del() //nefunguje jeste
 {
+    int dalsi;
+    int radek;
     show(0);
     printf("Zadej cislo radku ktery chcete smazat:");
+    scanf("%d", radek);
+    for (radek; radek < (poradi + 1); radek++)
+    {
+        dalsi = radek + 1;
+        /*zamky[radek].nazev = zamky[dalsi].nazev;*/
+
+
+    }
+
 }
