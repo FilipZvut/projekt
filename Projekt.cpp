@@ -37,7 +37,7 @@ enum menu operace;                                       //proměnná jejíž ho
 //   Definice funkcí   //
 int main() {
 
-    do {                    //cyklus, který nám po spuštění programu zavolá funkce
+    do {                    //cyklus, který po spuštění programu zavolá funkce
         zapisdopromene();   //asi se bude provádět pokaždý uvidíme
         menu();
         vybrat();
@@ -57,9 +57,9 @@ void add()
     char dalsi;
 
     do {
-        system("cls");
+        system("cls");                                      //vyčištění konzole
         printf("Zadejte nazev: ");
-        scanf("%s", pridat[a].nazev);
+        scanf("%s", pridat[a].nazev);                       //
         printf("Zadejte lokaci: ");
         scanf("%s", pridat[a].misto);
         printf("Zadejte cenu vstupu: ");
