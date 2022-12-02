@@ -1,43 +1,48 @@
 ﻿// test projekt.cpp: Definuje vstupní bod pro aplikaci.
-//
+//   Vkladané knihovny a soubory   //
 #include <stdio.h>
-
 #include "Projekt.h"
 #include <conio.h>
 #include <Windows.h>
+
 #pragma warning(disable:4996)//proti warning
 
+//   Globální proměnné   //
 int poradi = 0; //:(
 
+//   Deklarace funkcí   //
 void add();
 void show(int stop);
 void menu();
 void vybrat();
 void zapisdopromene();
 void del();
+
+
 using namespace std;
 
-
+//   Struktury   //
 typedef struct {
-    char nazev[30];
-    char misto[30];
-    char cena[30];
-}ZAMEK;
+    char nazev[30];   //název hradu/zámku
+    char misto[30];   //místo kde se nachází hrad/zámek
+    char cena[30];    //cena vstupného
+}ZAMEK;               //typ ZAMEK
 
-ZAMEK zamky[500];
+ZAMEK zamky[500];   //proměnná typu ZAMEK
 
-enum menu { nic, zobrazit, pridat, upravit, vymazat };
-enum menu operace;
+//   Výčtové typy   //
+enum menu { nic, zobrazit, pridat, upravit, vymazat };   //výčet všech operací co lze v programu dělat
+enum menu operace;                                       //proměnná jejíž hodnota říká jaká operace se má provést
 
-
+//   Definice funkcí   //
 int main() {
 
-    do {
+    do {                    //cyklus, který po spuštění programu zavolá funkce
         zapisdopromene();   //asi se bude provádět pokaždý uvidíme
         menu();
         vybrat();
 
-    } while (true);
+    } while (true);         //podmínka cyklu
 
 }
 
@@ -52,9 +57,9 @@ void add()
     char dalsi;
 
     do {
-        system("cls");
+        system("cls");                                      //vyčištění konzole
         printf("Zadejte nazev: ");
-        scanf("%s", pridat[a].nazev);
+        scanf("%s", pridat[a].nazev);                       //
         printf("Zadejte lokaci: ");
         scanf("%s", pridat[a].misto);
         printf("Zadejte cenu vstupu: ");
