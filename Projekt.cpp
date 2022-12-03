@@ -1,48 +1,47 @@
 ﻿// test projekt.cpp: Definuje vstupní bod pro aplikaci.
-//   Vkladané knihovny a soubory   //
+//
 #include <stdio.h>
-#include "Projekt.h"
+#include <cstdlib>
+#include "projekt.h"
 #include <conio.h>
+#include <string>
 #include <Windows.h>
-
+#include <stdlib.h>
 #pragma warning(disable:4996)//proti warning
-
-//   Globální proměnné   //
 int poradi = 0; //:(
 
-//   Deklarace funkcí   //
 void add();
 void show(int stop);
 void menu();
 void vybrat();
 void zapisdopromene();
+void zapisdotxt();
+void change();
 void del();
-
-
+void hledat();
 using namespace std;
 
-//   Struktury   //
+
 typedef struct {
-    char nazev[30];   //název hradu/zámku
-    char misto[30];   //místo kde se nachází hrad/zámek
-    char cena[30];    //cena vstupného
-}ZAMEK;               //typ ZAMEK
+    char nazev[30];
+    char misto[30];
+    char cena[30];
+}ZAMEK;
 
-ZAMEK zamky[500];   //proměnná typu ZAMEK
+ZAMEK zamky[5000000];
 
-//   Výčtové typy   //
-enum menu { nic, zobrazit, pridat, upravit, vymazat };   //výčet všech operací co lze v programu dělat
-enum menu operace;                                       //proměnná jejíž hodnota říká jaká operace se má provést
+enum menu { nic, zobrazit, pridat, upravit, vymazat, vyhledat };
+enum menu operace;
 
-//   Definice funkcí   //
+
 int main() {
 
-    do {                    //cyklus, který po spuštění programu zavolá funkce
+    do {
         zapisdopromene();   //asi se bude provádět pokaždý uvidíme
         menu();
         vybrat();
 
-    } while (true);         //podmínka cyklu
+    } while (true);
 
 }
 
@@ -57,13 +56,13 @@ void add()
     char dalsi;
 
     do {
-        system("cls");                                      //vyčištění konzole
+        system("cls");
         printf("Zadejte nazev: ");
-        scanf("%s", pridat[a].nazev);                       //
+        scanf("%s", &pridat[a].nazev);
         printf("Zadejte lokaci: ");
-        scanf("%s", pridat[a].misto);
+        scanf("%s", &pridat[a].misto);
         printf("Zadejte cenu vstupu: ");
-        scanf("%s", pridat[a].cena);
+        scanf("%s", &pridat[a].cena);
         a++;
         pocet++;
         printf("Budete chtit pridat dalsi zamek? [a/n]\n");
@@ -75,7 +74,7 @@ void add()
     FILE* wrt;
     wrt = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "a");
     for (int a = 0; a < pocet; a++) {
-        fprintf(wrt, "%s,%s,%s*\n", pridat[a].nazev, pridat[a].misto, pridat[a].cena);
+        fprintf(wrt, "%s,%s,%s\n", pridat[a].nazev, pridat[a].misto, pridat[a].cena);
     }
     fclose(wrt);
 
@@ -89,9 +88,9 @@ void show(int stop) {
     for (int poradi1 = 0; poradi1 < poradi; poradi1++) {
 
 
-        printf("%s,", zamky[poradi1].nazev);
+        printf("%d)  %s,", poradi1, zamky[poradi1].nazev);
         printf("%s,", zamky[poradi1].misto);
-        printf("%s", zamky[poradi1].cena);
+        printf("%s\n", zamky[poradi1].cena);
 
     }
     if (stop)
@@ -108,6 +107,7 @@ void menu() {
     printf("        2. pridat\n");
     printf("        3. upravit\n");
     printf("        4. smazat\n");
+    printf("        5. vyhledavani\n");
     scanf("%d", &operace);
 
 }
@@ -122,6 +122,9 @@ void vybrat() {
             break;
         case vymazat: del();
             break;
+        case upravit: change();
+            break;
+        case vyhledat: hledat();
         default:system("cls");
             printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu.");
             Sleep(2000);
@@ -146,7 +149,7 @@ void zapisdopromene()
     rd = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "r");
 
     while ((c = fgetc(rd)) != EOF)
-        if (c != '*')
+        if (c != '\n')
         {
             if (c != ',') {
                 if (typ == 0)
@@ -179,19 +182,124 @@ void zapisdopromene()
 
 }
 
-void del() //nefunguje jeste
+void change()
 {
-    int dalsi;
     int radek;
     show(0);
-    printf("Zadej cislo radku ktery chcete smazat:");
-    scanf("%d", radek);
-    for (radek; radek < (poradi + 1); radek++)
+    printf("\n\n    Zadejte radek ktery chcete upravit: ");
+    scanf("%d", &radek);
+    system("cls");
+    printf("Upravuje se tento zamek/hrad:\n      %s, %s, %s\n\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);
+    printf("Zadejte novy nazev: ");
+    scanf("%s", &zamky[radek].nazev);
+    printf("Zadejte novou lokaci: ");
+    scanf("%s", &zamky[radek].misto);
+    printf("Zadejte novou cenu vstupu: ");
+    scanf("%s", &zamky[radek].cena);
+    system("cls");
+    printf("Nove udaje jsou:    %s, %s, %s\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);
+    getche();
+
+
+    zapisdotxt();
+
+}
+
+
+
+void del() //nefunguje jeste
+{
+    int pom = 0;
+    int dalsi;
+    int radek;
+    do
     {
-        dalsi = radek + 1;
-        /*zamky[radek].nazev = zamky[dalsi].nazev;*/
+        system("cls");
+        if (pom == 1)
+        {
+            printf("zadal si spatne cislo radku, zkus to znova.");
+            Sleep(3000);
+            system("cls");
+        }
+        pom = 0;
+        show(0);
+        printf("\n  Zadej cislo radku ktery chcete smazat:");
+        scanf("%d", &radek);
+        pom = 1;
+    } while (radek >= poradi || radek < 0);
+
+    system("cls");
+    printf("Jste si jisti ze chcete smazat tento zamek/hrad: %s,%s,%s\nano/ne [a/n]\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);
 
 
+    if (getch() == 'a')
+    {
+        for (radek; radek < poradi; radek++)
+        {
+            dalsi = radek + 1;
+            strcpy(zamky[radek].nazev, zamky[dalsi].nazev);
+            strcpy(zamky[radek].misto, zamky[dalsi].misto);
+            strcpy(zamky[radek].cena, zamky[dalsi].cena);
+        }
+        poradi--;
+        zapisdotxt();
     }
+
+    printf("\nChcete smazat dalsi radek?\nano/ne [a/n]\n");
+    if (getche() == 'a')
+        del();
+
+}
+
+void zapisdotxt()
+{
+    FILE* wrt1;
+    wrt1 = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "w");
+    for (int a = 0; a < poradi; a++) {
+        fprintf(wrt1, "%s,%s,%s\n", zamky[a].nazev, zamky[a].misto, zamky[a].cena);
+    }
+    fclose(wrt1);
+}
+
+void hledat()
+{
+    int pismena = 0;
+    char entr;
+    char prom[30];
+    int strg = 0;
+    prom[0] = '\0';
+
+
+    system("cls");
+    printf("Zadejte Nazev:%s");
+    scanf("%s", &prom);
+
+
+
+
+
+    for (int a = 0; a < poradi; a++)
+    {
+        while (zamky[a].nazev[pismena] == prom[pismena] && prom[pismena] != '\n')
+        {
+            if (pismena < strlen(prom));
+            else
+                strg = 1;
+            pismena++;
+        }
+        if (strg == 1)
+        {
+            printf("%d) %s,%s,%s\n", a, zamky[a].nazev, zamky[a].misto, zamky[a].cena);
+            strg = 0;
+        }
+        pismena = 0;
+    }
+
+
+
+
+
+
+
 
 }
