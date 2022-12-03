@@ -2,7 +2,7 @@
 //
 #include <stdio.h>
 #include <cstdlib>
-#include "projekt.h"
+#include "test projekt.h"
 #include <conio.h>
 #include <string>
 #include <Windows.h>
@@ -49,7 +49,7 @@ int main() {
 
 void add()
 {
-
+    char temp;
     ZAMEK pridat[50];
     int a = 0;
     int pocet = 0;
@@ -58,11 +58,14 @@ void add()
     do {
         system("cls");
         printf("Zadejte nazev: ");
-        scanf("%s", &pridat[a].nazev);
+        scanf("%c", &temp); // temp statement to clear buffer
+        scanf("%[^\n]", pridat[a].nazev);
         printf("Zadejte lokaci: ");
-        scanf("%s", &pridat[a].misto);
+        scanf("%c", &temp); // temp statement to clear buffer
+        scanf("%[^\n]", pridat[a].misto);
         printf("Zadejte cenu vstupu: ");
-        scanf("%s", &pridat[a].cena);
+        scanf("%c", &temp); // temp statement to clear buffer
+        scanf("%[^\n]", pridat[a].cena);
         a++;
         pocet++;
         printf("Budete chtit pridat dalsi zamek? [a/n]\n");
@@ -263,8 +266,8 @@ void zapisdotxt()
 
 void hledat()
 {
-    int pismena = 0;
     char entr;
+    int pismena = 0;
     char prom[30];
     int strg = 0;
     prom[0] = '\0';
@@ -296,8 +299,7 @@ void hledat()
     }
 
 
-
-
+    entr = getche();
 
 
 
