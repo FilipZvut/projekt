@@ -1,5 +1,6 @@
 ﻿// test projekt.cpp: Definuje vstupní bod pro aplikaci.
 //
+    //   vyuzivane knihovny a soubory ///
 #include <stdio.h>
 #include <cstdlib>
 #include "projekt.h"
@@ -8,9 +9,12 @@
 #include <Windows.h>
 #include <stdlib.h>
 #pragma warning(disable:4996)//proti warning
+
+    //   Globalni promenne   //
 int poradi = 0; //  :(
 int konec = 1; //   :(
 
+    //   Deklarace funkci   //
 void add();
 void show(int stop);
 void menu();
@@ -23,89 +27,90 @@ void hledat();
 void finboss();
 using namespace std;
 
-                                        //a roztridit to do hlavicek a funkci .cpp
-typedef struct {                        //Dodela serazeni podle jmena(podle abecedy)
-    char nazev[30];                     //upravit misto ulozeni txt na zakladni 
-    char misto[30];                     //jeste budem pridavat oteviraci hodiny vsude
-    char cena[30];                      // na pridani popisu zamku kaslem, to by rozhodilo celou tabulku xd
-}ZAMEK;
+                                                                           //a roztridit to do hlavicek a funkci .cpp
+    //   Struktury   //
+typedef struct {                                                           //Dodela serazeni podle jmena(podle abecedy)
+    char nazev[30];  // nazev hradu/zamku //                               //upravit misto ulozeni txt na zakladni 
+    char misto[30];  // lokace kde se zamek/hrad nachazi                   //jeste budem pridavat oteviraci hodiny vsude
+    char cena[30];   // cena vstupneho   //                                // na pridani popisu zamku kaslem, to by rozhodilo celou tabulku xd
+}ZAMEK;              // typ ZAMEK //
 
-ZAMEK zamky[5000];
+ZAMEK zamky[5000];   // promenna typu ZAMEK, s maximalni velikosti zamku/hradu //
 
-enum menu { nic, zobrazit, pridat, upravit, vymazat, vyhledat, konecna };
-enum menu operace;
+    //   Vyctove typy   //
+enum menu { nic, zobrazit, pridat, upravit, vymazat, vyhledat, konecna };   // vsechny moznosti, ktere muze uzivatel provest //
+enum menu operace;  // promenna, ktera podle sve hodnoty rika jaka moznost se ma provest //
 
 
 int main() {
 
-    do {
+    do {        //cyklus volajici zakladni funkce behu programu, dokud neni zneplatnena podminka //
 
-        zapisdopromene();   //asi se bude provádět pokaždý uvidíme
-        menu();
-        vybrat();
+        zapisdopromene(); // volani funkce zapisu dat //  //asi se bude provádět pokaždý uvidíme
+        menu(); // volani funkce s menu programu //
+        vybrat(); // volani funkce zobrazujici upravy
+    } while (konec); //podminka konce cylku //
 
-    } while (konec);
-
-    finboss();
+    finboss(); // volani funkce, zaverecny titulku //
 }
 
 
 
-void add()
+void add()  // funkce pro pridani hradu/zamku //
 {
-    char temp;
-    ZAMEK pridat[50];
-    int a = 0;
+    char temp;  // docasna promenna typu char //
+    ZAMEK pridat[50]; //promenna typu ZAMEK, s omezenim pro jednotlive data //
+    int a = 0; // dalsi pomocne/urcujici promenne //
     int pocet = 0;
     char dalsi;
 
-    do {
-        system("cls");
+    do {    // cylkus pro pridavani hradu/zamku //
+        system("cls");  // vycisteni konzole //
         printf("Zadejte nazev: ");
-        scanf("%c", &temp); // temp statement to clear buffer
-        scanf("%[^\n]", pridat[a].nazev);
+        scanf("%c", &temp); // vycisteni bufferu //       // temp statement to clear buffer
+        scanf("%[^\n]", pridat[a].nazev);   // pridani nazvu //
         printf("Zadejte lokaci: ");
-        scanf("%c", &temp); // temp statement to clear buffer
-        scanf("%[^\n]", pridat[a].misto);
+        scanf("%c", &temp); // vycisteni bufferu // // temp statement to clear buffer
+        scanf("%[^\n]", pridat[a].misto);   // pridani lokace //
         printf("Zadejte cenu vstupu: ");
-        scanf("%c", &temp); // temp statement to clear buffer
-        scanf("%[^\n]", pridat[a].cena);
-        a++;
-        pocet++;
+        scanf("%c", &temp); // vycisteni bufferu // // temp statement to clear buffer
+        scanf("%[^\n]", pridat[a].cena);    // pridani ceny vstupneho //
+        a++;        // inkrementace promenne //
+        pocet++;    // inkrementace promenne //
         printf("Budete chtit pridat dalsi zamek? [a/n]\n");
-        dalsi = getche();
-        system("cls");
+        dalsi = getche();   // cteni zadaneho parametru //
+        system("cls");  // vycisteni konzole //
 
-    } while (dalsi == 'a');
+    } while (dalsi == 'a'); // podminka ukonceni cyklu //
     ;
-    FILE* wrt;
-    wrt = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "a");
-    for (int a = 0; a < pocet; a++) {
-        fprintf(wrt, "%s,%s,%s\n", pridat[a].nazev, pridat[a].misto, pridat[a].cena);
+    FILE* wrt; // promenna pro praci se souborem //
+    wrt = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "a"); // otevirani souboru, cestu k souboru a parametr jak se ma soubor otevrit //
+    for (int a = 0; a < pocet; a++) { // cyklus //
+        fprintf(wrt, "%s,%s,%s\n", pridat[a].nazev, pridat[a].misto, pridat[a].cena); // pridavani dat do souboru //
     }
-    fclose(wrt);
+    fclose(wrt); // uzavreti souboru //
 
 
 }
 
-void show(int stop) {
-    int dva = 0;
+void show(int stop) { // funkce pro zobrazeni a formatovani dat //
+    int dva = 0; // promenne //
     char format[30];
-    system("cls");
+    system("cls");  // vycisteni konzole //
     printf("    Nazev:                        |Lokace:                       |vstupne:            |\n__________________________________|______________________________|____________________|\n");
-    for (int poradi1 = 0; poradi1 < poradi; poradi1++) {
-        if (poradi1 > 9)
+    for (int poradi1 = 0; poradi1 < poradi; poradi1++) {    // cyklus pro naformatovani ulozenych dat //
+        if (poradi1 > 9)      // urcovaci podminky pro formatovani //
             dva = 1;
         if (poradi > 99)
             dva = 2;
 
-        for (int a = 0; a < 30; a++)
-            format[a] = ' ';
-        format[(30 - strlen(zamky[poradi1].nazev) - dva)] = '\0';
+        for (int a = 0; a < 30; a++)    // cyklus pro urceni velikosti mezery //
+            format[a] = ' ';    // uprava formatovani //
+        format[(30 - strlen(zamky[poradi1].nazev) - dva)] = '\0';   //vypocet znaku nulove hodnoty //
 
-        printf("%d)  %s%s|", poradi1, zamky[poradi1].nazev, format);
-        for (int a = 0; a < 30; a++)
-            format[a] = ' ';
+        printf("%d)  %s%s|", poradi1, zamky[poradi1].nazev, format);    //vypis formatovane casti dat //
+        for (int a = 0; a < 30; a++)    // cyklus pro urceni velikosti mezery //
+            format[a] = ' ';    // uprava formatovani //
         format[(30 - strlen(zamky[poradi1].misto))] = '\0';
 
         printf("%s%s|", zamky[poradi1].misto, format);
@@ -120,7 +125,7 @@ void show(int stop) {
 
 }
 
-void menu() {
+void menu() {   // funkce zobrazujici mozne operace //
 
     system("cls");
     printf("\n ______Projekt hrady a zamky______\n");
@@ -131,7 +136,7 @@ void menu() {
     printf("        4. smazat\n");
     printf("        5. vyhledavani\n");
     printf("        6. Vypnout\n");
-    scanf("%d", &operace);
+    scanf("%d", &operace);  // precteni zadane hodnoty //
 
 }
 
@@ -151,8 +156,8 @@ void vybrat() {
             break;
         case konecna:  konec = 0;
             break;
-        default:system("cls");
-            printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu.");
+        default:system("cls"); // vycisteni konzole //
+            printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu."); // uzivateli vzdornost //
             Sleep(2000);
             menu();
             break;
