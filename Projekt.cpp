@@ -85,17 +85,32 @@ void add()
 }
 
 void show(int stop) {
-
+    int dva = 0;
+    char format[30];
     system("cls");
-    printf("Nazev,    Lokace,    vstupne\n-------------------------------\n");
+    printf("    Nazev:                        |Lokace:                       |vstupne:            |\n__________________________________|______________________________|____________________|\n");
     for (int poradi1 = 0; poradi1 < poradi; poradi1++) {
+        if (poradi1 > 9)
+            dva = 1;
+        if (poradi > 99)
+            dva = 2;
 
+        for (int a = 0; a < 30; a++)
+            format[a] = ' ';
+        format[(30 - strlen(zamky[poradi1].nazev) - dva)] = '\0';
 
-        printf("%d)  %s,", poradi1, zamky[poradi1].nazev);
-        printf("%s,", zamky[poradi1].misto);
-        printf("%s\n", zamky[poradi1].cena);
+        printf("%d)  %s%s|", poradi1, zamky[poradi1].nazev, format);
+        for (int a = 0; a < 30; a++)
+            format[a] = ' ';
+        format[(30 - strlen(zamky[poradi1].misto))] = '\0';
+
+        printf("%s%s|", zamky[poradi1].misto, format);
+        format[(20 - strlen(zamky[poradi1].cena))] = '\0';
+        printf("%s%s|\n", zamky[poradi1].cena, format);
+        printf("----------------------------------|------------------------------|--------------------|\n");
 
     }
+    //printf("--------------------------------------------------------------------------------------|");
     if (stop)
         getche();
 
@@ -187,6 +202,7 @@ void zapisdopromene()
 
 void change()
 {
+    char temp;
     int radek;
     show(0);
     printf("\n\n    Zadejte radek ktery chcete upravit: ");
@@ -194,11 +210,14 @@ void change()
     system("cls");
     printf("Upravuje se tento zamek/hrad:\n      %s, %s, %s\n\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);
     printf("Zadejte novy nazev: ");
-    scanf("%s", &zamky[radek].nazev);
+    scanf("%c", &temp); // temp statement to clear buffer
+    scanf("%[^\n]", zamky[radek].nazev);
     printf("Zadejte novou lokaci: ");
-    scanf("%s", &zamky[radek].misto);
+    scanf("%c", &temp); // temp statement to clear buffer
+    scanf("%[^\n]", zamky[radek].misto);
     printf("Zadejte novou cenu vstupu: ");
-    scanf("%s", &zamky[radek].cena);
+    scanf("%c", &temp); // temp statement to clear buffer
+    scanf("%[^\n]", zamky[radek].cena);
     system("cls");
     printf("Nove udaje jsou:    %s, %s, %s\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);
     getche();
@@ -305,3 +324,4 @@ void hledat()
 
 
 }
+
