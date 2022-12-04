@@ -143,7 +143,7 @@ void menu() {   // funkce zobrazujici mozne operace //
 void vybrat() {
 
     do {
-        switch (operace) {
+        switch (operace) {  //case pro prepinani podle urcite hodnoty //
         case zobrazit: show(1);
             break;
         case pridat:   add();
@@ -158,26 +158,26 @@ void vybrat() {
             break;
         default:system("cls"); // vycisteni konzole //
             printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu."); // uzivateli vzdornost //
-            Sleep(2000);
-            menu();
-            break;
+            Sleep(2000);    // cekani //
+            menu(); // volani funkce //
+            break;  // ukonci cyklus //
         }
-    } while (operace < 0 || operace>6);
+    } while (operace < 0 || operace>6); // podminka cyklu //
 
 
 }
 
 
-void zapisdopromene()
+void zapisdopromene()   //funkce pro zapis do promenne //
 {
-    poradi = 0;
+    poradi = 0; // promenne... //
     int typ = 0;
     int a = 0;
     char c;
 
 
-    FILE* rd;
-    rd = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "r");
+    FILE* rd;   // promenna pro praci se souborem //
+    rd = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "r"); // otevirani souboru, cesta k souboru a parametr jak otevrit soubor //
 
     while ((c = fgetc(rd)) != EOF)
         if (c != '\n')
