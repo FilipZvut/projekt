@@ -179,10 +179,10 @@ void zapisdopromene()   //funkce pro zapis do promenne //
     FILE* rd;   // promenna pro praci se souborem //
     rd = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "r"); // otevirani souboru, cesta k souboru a parametr jak otevrit soubor //
 
-    while ((c = fgetc(rd)) != EOF)
-        if (c != '\n')
+    while ((c = fgetc(rd)) != EOF)  // podminka cyklu zda promenna nerovna konci souboru //
+        if (c != '\n')  // podminka zda se promenna nerovna konci radku //
         {
-            if (c != ',') {
+            if (c != ',') { // formatovaci podminka //
                 if (typ == 0)
                     zamky[poradi].nazev[a] = c;
                 if (typ == 1)
@@ -190,7 +190,7 @@ void zapisdopromene()   //funkce pro zapis do promenne //
                 if (typ == 2)
                     zamky[poradi].cena[a] = c;
 
-                a++;
+                a++;    // inkrementace promenne //
             }
             else {
                 if (typ == 0)
@@ -198,8 +198,8 @@ void zapisdopromene()   //funkce pro zapis do promenne //
                 if (typ == 1)
                     zamky[poradi].misto[a] = '\0';
 
-                a = 0;
-                typ++;
+                a = 0;  // deklarace promenne //
+                typ++;  // inkrementace promenne //
             }
         }
         else {
