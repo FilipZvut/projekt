@@ -335,11 +335,13 @@ void hledat()
 }
 
 
-
 void finboss() {
     system("cls");
     printf("\n\n\n\n\n\n\n\n\n\n\n");
-    printf("                                       ____projekt Databaze Hradu a Zamku____\n");
-    printf("                                        vytvoril: Filip Zadnik, Vitek Urban");
+    printf("                                      ________________________________________\n");
+    printf("                                      \\____projekt Databaze Hradu a Zamku____/\n");
+    printf("                                       \\------------------------------------/\n");
+    printf("                                        \\vytvoril: Filip Zadnik a Vit Urban/\n");
+    printf("                                         \\________________________________/\n");
     Sleep(5000);
 }
