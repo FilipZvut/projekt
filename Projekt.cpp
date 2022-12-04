@@ -8,7 +8,8 @@
 #include <Windows.h>
 #include <stdlib.h>
 #pragma warning(disable:4996)//proti warning
-int poradi = 0; //:(
+int poradi = 0; //  :(
+int konec = 1; //   :(
 
 void add();
 void show(int stop);
@@ -19,30 +20,33 @@ void zapisdotxt();
 void change();
 void del();
 void hledat();
+void finboss();
 using namespace std;
 
-
-typedef struct {
-    char nazev[30];
-    char misto[30];
-    char cena[30];
+                                        //a roztridit to do hlavicek a funkci .cpp
+typedef struct {                        //Dodela serazeni podle jmena(podle abecedy)
+    char nazev[30];                     //upravit misto ulozeni txt na zakladni 
+    char misto[30];                     //jeste budem pridavat oteviraci hodiny vsude
+    char cena[30];                      // na pridani popisu zamku kaslem, to by rozhodilo celou tabulku xd
 }ZAMEK;
 
-ZAMEK zamky[5000000];
+ZAMEK zamky[5000];
 
-enum menu { nic, zobrazit, pridat, upravit, vymazat, vyhledat };
+enum menu { nic, zobrazit, pridat, upravit, vymazat, vyhledat, konecna };
 enum menu operace;
 
 
 int main() {
 
     do {
+
         zapisdopromene();   //asi se bude provádět pokaždý uvidíme
         menu();
         vybrat();
 
-    } while (true);
+    } while (konec);
 
+    finboss();
 }
 
 
@@ -126,6 +130,7 @@ void menu() {
     printf("        3. upravit\n");
     printf("        4. smazat\n");
     printf("        5. vyhledavani\n");
+    printf("        6. Vypnout\n");
     scanf("%d", &operace);
 
 }
@@ -136,20 +141,23 @@ void vybrat() {
         switch (operace) {
         case zobrazit: show(1);
             break;
-        case pridat: add();
+        case pridat:   add();
             break;
-        case vymazat: del();
+        case vymazat:  del();
             break;
-        case upravit: change();
+        case upravit:  change();
             break;
         case vyhledat: hledat();
+            break;
+        case konecna:  konec = 0;
+            break;
         default:system("cls");
             printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu.");
             Sleep(2000);
             menu();
             break;
         }
-    } while (operace < 0 || operace>4);
+    } while (operace < 0 || operace>6);
 
 
 }
@@ -294,7 +302,8 @@ void hledat()
 
     system("cls");
     printf("Zadejte Nazev:%s");
-    scanf("%s", &prom);
+    scanf("%c", &entr);
+    scanf("%[^\n]", prom);
 
 
 
@@ -325,3 +334,12 @@ void hledat()
 
 }
 
+
+
+void finboss() {
+    system("cls");
+    printf("\n\n\n\n\n\n\n\n\n\n\n");
+    printf("                                       ____projekt Databaze Hradu a Zamku____\n");
+    printf("                                        vytvoril: Filip Zadnik, Vitek Urban");
+    Sleep(5000);
+}
