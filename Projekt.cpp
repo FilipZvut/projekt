@@ -9,7 +9,7 @@
 #include <Windows.h>
 #include <stdlib.h>
 #pragma warning(disable:4996)//proti warning
-
+using namespace std;
     //   Globalni promenne   //
 int poradi = 0; //  :(
 int konec = 1; //   :(
@@ -25,7 +25,6 @@ void change();
 void del();
 void hledat();
 void finboss();
-using namespace std;
 
                                                                            //a roztridit to do hlavicek a funkci .cpp
     //   Struktury   //
@@ -67,13 +66,13 @@ void add()  // funkce pro pridani hradu/zamku //
     do {    // cylkus pro pridavani hradu/zamku //
         system("cls");  // vycisteni konzole //
         printf("Zadejte nazev: ");
-        scanf("%c", &temp); // vycisteni bufferu //       // temp statement to clear buffer
+        scanf("%c", &temp); // vycisteni bufferu //
         scanf("%[^\n]", pridat[a].nazev);   // pridani nazvu //
         printf("Zadejte lokaci: ");
-        scanf("%c", &temp); // vycisteni bufferu // // temp statement to clear buffer
+        scanf("%c", &temp); // vycisteni bufferu //
         scanf("%[^\n]", pridat[a].misto);   // pridani lokace //
         printf("Zadejte cenu vstupu: ");
-        scanf("%c", &temp); // vycisteni bufferu // // temp statement to clear buffer
+        scanf("%c", &temp); // vycisteni bufferu //
         scanf("%[^\n]", pridat[a].cena);    // pridani ceny vstupneho //
         a++;        // inkrementace promenne //
         pocet++;    // inkrementace promenne //
@@ -82,11 +81,10 @@ void add()  // funkce pro pridani hradu/zamku //
         system("cls");  // vycisteni konzole //
 
     } while (dalsi == 'a'); // podminka ukonceni cyklu //
-    ;
     FILE* wrt; // promenna pro praci se souborem //
     wrt = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "a"); // otevirani souboru, cestu k souboru a parametr jak se ma soubor otevrit //
-    for (int a = 0; a < pocet; a++) { // cyklus //
-        fprintf(wrt, "%s,%s,%s\n", pridat[a].nazev, pridat[a].misto, pridat[a].cena); // pridavani dat do souboru //
+    for (int i = 0; i < pocet; i++) { // cyklus //
+        fprintf(wrt, "%s,%s,%s\n", pridat[i].nazev, pridat[i].misto, pridat[i].cena); // pridavani dat do souboru //
     }
     fclose(wrt); // uzavreti souboru //
 
