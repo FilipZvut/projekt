@@ -159,9 +159,9 @@ void vybrat()
     do
     {
        
-        switch (operace) {  //case pro prepinani podle urcite hodnoty //
-        case zobrazit: show(1);
-            break;
+        switch (operace) {  // case pro prepinani podle urcite hodnoty //
+        case zobrazit: show(1); // pokud se hodnota promenne "operace" rovna hodnote "zobrazit" provede se zavolani funkce //
+            break;  // ukonci switch //
         case pridat:   add();
             break;
         case vymazat:  del();
@@ -174,7 +174,7 @@ void vybrat()
             break;
         default:system("cls"); // vycisteni konzole //
             printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu."); // uzivateli vzdornost //
-            Sleep(2000);    // cekani //
+            Sleep(2000);    // cekani, protoze muzeme //
             menu(); // volani funkce //
             break;  // ukonci cyklus //
         }
@@ -201,8 +201,8 @@ void zapisdopromene()   //funkce pro zapis do promenne //
 
             if (c != ',') { // formatovaci podminka //
 
-                if (typ == 0)
-                    zamky[poradi].nazev[a] = c;
+                if (typ == 0)   // overeni podminky //
+                    zamky[poradi].nazev[a] = c; // zapisovani textu do promennych ve strukture //
                 if (typ == 1)
                     zamky[poradi].misto[a] = c;
                 if (typ == 2)
@@ -215,7 +215,7 @@ void zapisdopromene()   //funkce pro zapis do promenne //
             {
 
                 if (typ == 0)
-                    zamky[poradi].nazev[a] = '\0';
+                    zamky[poradi].nazev[a] = '\0';  //ulozi to promenne nulovaci znak //
                 if (typ == 1)
                     zamky[poradi].misto[a] = '\0';
 
@@ -224,7 +224,6 @@ void zapisdopromene()   //funkce pro zapis do promenne //
 
             }
         }
-
         else
         {
 
@@ -235,74 +234,74 @@ void zapisdopromene()   //funkce pro zapis do promenne //
 
         }
 
-    fclose(rd);
+    fclose(rd); // uzavreni souboru //
 
 }
 
 void change()
 {
 
-    char temp;
+    char temp;  // promenne //
     int radek;
 
-    show(0);
+    show(0);    // volani funkce s parametrem //
     printf("\n\n    Zadejte radek ktery chcete upravit: ");
-    scanf("%d", &radek);
-    system("cls");
-    printf("Upravuje se tento zamek/hrad:\n      %s, %s, %s\n\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);
+    scanf("%d", &radek);    // cteni parametru z konzole //
+    system("cls");  // vycisteni konzole //
+    printf("Upravuje se tento zamek/hrad:\n      %s, %s, %s\n\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);   // vypis co upravujeme //
     printf("Zadejte novy nazev: ");
-    scanf("%c", &temp); // temp statement to clear buffer
-    scanf("%[^\n]", zamky[radek].nazev);
+    scanf("%c", &temp); // vycisteni bufferu //
+    scanf("%[^\n]", zamky[radek].nazev);    // ukladani dat do promenne //
     printf("Zadejte novou lokaci: ");
-    scanf("%c", &temp); // temp statement to clear buffer
+    scanf("%c", &temp); // vycisteni bufferu //
     scanf("%[^\n]", zamky[radek].misto);
     printf("Zadejte novou cenu vstupu: ");
-    scanf("%c", &temp); // temp statement to clear buffer
-    scanf("%[^\n]", zamky[radek].cena);
-    system("cls");
-    printf("Nove udaje jsou:    %s, %s, %s\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);
-    getche();
-    zapisdotxt();
+    scanf("%c", &temp); // vycisteni bufferu //
+    scanf("%[^\n]", zamky[radek].cena); // cteni z konzole //
+    system("cls");  // vycisteni konzole //
+    printf("Nove udaje jsou:    %s, %s, %s\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);  // vypis upravenych dat //
+    getche();   // cteni z konzole
+    zapisdotxt();   // volani funkce //
 
 }
 
 void del()
 {
-    int pom = 0;
+    int pom = 0;    // promenne //
     int dalsi;
     int radek;
 
     do
     {
-        system("cls");
-        if (pom == 1)
+        system("cls");  // vycisteni konzole //
+        if (pom == 1)   // overeni podminky //
         {
 
             printf("zadal si spatne cislo radku, zkus to znova.");
-            Sleep(3000);
-            system("cls");
+            Sleep(3000);    // cekani //
+            system("cls");  // vycisteni konzole //
 
         }
 
         pom = 0;
-        show(0);
+        show(0);    // volani funkce //
         printf("\n  Zadej cislo radku ktery chcete smazat:");
-        scanf("%d", &radek);
+        scanf("%d", &radek);    //ukladani dat do promenne //
         pom = 1;
 
-    } while (radek >= poradi || radek < 0);
+    } while (radek >= poradi || radek < 0); // podminka cyklu //
 
-    system("cls");
+    system("cls");  // vycisteni konzole //
     printf("Jste si jisti ze chcete smazat tento zamek/hrad: %s,%s,%s\nano/ne [a/n]\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena);
 
-    if (getch() == 'a')
+    if (getch() == 'a') // overeni podminky //
     {
 
         for (radek; radek < poradi; radek++)
         {
 
             dalsi = radek + 1;
-            strcpy(zamky[radek].nazev, zamky[dalsi].nazev);
+            strcpy(zamky[radek].nazev, zamky[dalsi].nazev); // 
             strcpy(zamky[radek].misto, zamky[dalsi].misto);
             strcpy(zamky[radek].cena, zamky[dalsi].cena);
 
@@ -370,11 +369,11 @@ void hledat()
 
     }
 
-    entr = getche();
+    entr = getche();    // precte znaky v konzoli //
 
 }
 
-void finboss()
+void finboss()  // :) //
 {
 
     system("cls");
