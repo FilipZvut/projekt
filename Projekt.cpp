@@ -323,37 +323,37 @@ void zapisdotxt()
     FILE* wrt1; // promenna pro praci se soubory //
     wrt1 = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "w");   // // otevirani souboru, cestu k souboru a parametr jak se ma se souborem pracovat //
     
-    for (int a = 0; a < poradi; a++)
+    for (int a = 0; a < poradi; a++)    // podminka pro ulozeni vsech radku do souboru //
     {
 
-        fprintf(wrt1, "%s,%s,%s\n", zamky[a].nazev, zamky[a].misto, zamky[a].cena);
+        fprintf(wrt1, "%s,%s,%s\n", zamky[a].nazev, zamky[a].misto, zamky[a].cena); // psani do souboru //
     
     }
-    fclose(wrt1);
+    fclose(wrt1);   // uzavreni souboru //
 }
 
 void hledat()
 {
 
-    char entr;
+    char entr;  // promenne //
     int pismena = 0;
     char prom[30];
     int strg = 0;
-    prom[0] = '\0';
+    prom[0] = '\0'; // hodnota uvodni hodnoty v poli //
 
-    system("cls");
+    system("cls");  // vycisteni konzole //
     printf("Zadejte Nazev:%s");
-    scanf("%c", &entr);
-    scanf("%[^\n]", prom);
+    scanf("%c", &entr); // vycisteni bufferu //
+    scanf("%[^\n]", prom);  // nacteni dat do promenne //
 
-    for (int a = 0; a < poradi; a++)
+    for (int a = 0; a < poradi; a++)    // podminka kontrolujici zda jiz nebyl prekrocen pocet radku v databazi //
     {
 
-        while (zamky[a].nazev[pismena] == prom[pismena] && prom[pismena] != '\n')
+        while (zamky[a].nazev[pismena] == prom[pismena] && prom[pismena] != '\n') // podminka cyklu, pokud se vyhledavany text naleza v databazy a zaroven neni roven konci radku //
         {
 
-            if (pismena < strlen(prom));
-            else
+            if (pismena < strlen(prom));    // kontrola probiha po jednom znaku, tato podminka tedy kontroluje zda jsme dosli ke konci slova //
+            else    // pokud ano, nastavi hodnotu "strg" na jedna a kod muze pokracovat k vypisu // 
                 strg = 1;
             pismena++;
 
