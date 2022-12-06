@@ -301,27 +301,28 @@ void del()
         {
 
             dalsi = radek + 1;
-            strcpy(zamky[radek].nazev, zamky[dalsi].nazev); // 
-            strcpy(zamky[radek].misto, zamky[dalsi].misto);
-            strcpy(zamky[radek].cena, zamky[dalsi].cena);
+            strcpy(zamky[radek].nazev, zamky[dalsi].nazev); // nahrazeni radku jinym //
+            strcpy(zamky[radek].misto, zamky[dalsi].misto); // nahrazeni mista jinym //
+            strcpy(zamky[radek].cena, zamky[dalsi].cena);   // nahrazeni ceny jinou //
 
         }
 
-        poradi--;
-        zapisdotxt();
+        poradi--;   // odecet od promenne //
+        zapisdotxt();   // volani funkce //
 
     }
 
     printf("\nChcete smazat dalsi radek?\nano/ne [a/n]\n");
-    if (getche() == 'a')
-        del();
+    if (getche() == 'a')    // overeni podminky //
+        del();  // pri splneni podminky zavolani funkce del //
 
 }
 
 void zapisdotxt()
 {
-    FILE* wrt1;
-    wrt1 = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "w");
+    FILE* wrt1; // promenna pro praci se soubory //
+    wrt1 = fopen("C:\\Users\\zadni\\Desktop\\code\\test projekt\\test.txt", "w");   // // otevirani souboru, cestu k souboru a parametr jak se ma se souborem pracovat //
+    
     for (int a = 0; a < poradi; a++)
     {
 
