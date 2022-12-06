@@ -266,7 +266,7 @@ void change()
 
 }
 
-void del() //nefunguje jeste
+void del()
 {
     int pom = 0;
     int dalsi;
@@ -385,5 +385,5 @@ void finboss()
     printf("                                        \\vytvoril: Filip Zadnik a Vit Urban/\n");
     printf("                                         \\________________________________/\n");
     Sleep(5000);
-    
+
 }
