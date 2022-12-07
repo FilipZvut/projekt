@@ -1,8 +1,28 @@
-﻿// Projekt.h: Soubor k zahrnutí pro standardní systémové soubory k zahrnutí
-// nebo soubory k zahrnutí specifické pro projekt.
-
+﻿
 #pragma once
 
-#include <iostream>
+    //   vyuzivane knihovny a soubory ///
+#include <stdio.h>
+#include <conio.h>
+#include <Windows.h>
 
-// TODO: Zde odkažte na dodatečné hlavičky, které program vyžaduje.
+using namespace std;
+
+
+//   Deklarace funkci   //
+void sort();
+void add();
+void show(int stop);
+void menu();
+int vybrat();
+void zapisdopromene();
+void zapisdotxt();
+void change();
+void del();
+void hledat();
+void finboss();
+
+
+
+
+

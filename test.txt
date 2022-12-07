@@ -1,2 +1,4 @@
-Hluboka,    Brno,     150Kc
-Test1,    Test2,     Test3
+d,d,d,d
+2,d,d,d
+d,d,d,d
+d,d,d,d
