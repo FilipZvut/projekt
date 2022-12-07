@@ -12,7 +12,7 @@ using namespace std;
 
     //   Globalni promenne   //
 int poradi = 0; //  :(
-int konec; // :(
+int konec = 1; // :(
 
     //   Deklarace funkci   //
 void add();
@@ -44,7 +44,6 @@ enum menu operace;  // promenna, ktera podle sve hodnoty rika jaka moznost se ma
 
 int main()
 {
-    konec = 1;
     do      //cyklus volajici zakladni funkce behu programu, dokud neni zneplatnena podminka //
     {        
 
