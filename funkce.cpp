@@ -36,8 +36,8 @@ void add()  // funkce pro pridani hradu/zamku //
 
         system("cls");  // vycisteni konzole //
         printf("Zadejte nazev: ");
-        scanf("%c", &temp); // vycisteni bufferu //
-        scanf("%[^\n]", pridat[a].nazev);   // pridani nazvu //
+        scanf("%c", &temp); // vycisteni bufferu, nactenim nejake hodnoty ze vstupu zajistime aby program nepreskocil dalsi vypisy a cteni //
+        scanf("%[^\n]", pridat[a].nazev);   // Cteni dat z konzole dokud nenarazi na znak konce radku (precte i mezeru) //
         printf("Zadejte lokaci: ");
         scanf("%c", &temp); // vycisteni bufferu //
         scanf("%[^\n]", pridat[a].misto);   // pridani lokace //
@@ -53,7 +53,7 @@ void add()  // funkce pro pridani hradu/zamku //
         dalsi = getche();   // cteni zadaneho parametru //
         system("cls");  // vycisteni konzole //
 
-    } while (dalsi == 'a'); // podminka ukonceni cyklu //
+    } while (dalsi == 'a'); // podminka cyklu //
 
     FILE* wrt; // promenna pro praci se souborem //
     wrt = fopen("databaze.txt", "a"); // otevirani souboru, cestu k souboru a parametr jak se ma soubor otevrit //
@@ -64,7 +64,7 @@ void add()  // funkce pro pridani hradu/zamku //
 
     }
 
-    fclose(wrt); // uzavreti souboru //
+    fclose(wrt); // uzavreni souboru //
 
 }
 
@@ -79,30 +79,30 @@ void show(int stop) // funkce pro zobrazeni a formatovani dat //
     for (int poradi1 = 0; poradi1 < poradi; poradi1++)  // cyklus pro naformatovani ulozenych dat //
     {
 
-        if (poradi1 > 9)      // urcovaci podminky pro formatovani //
+        if (poradi1 > 9)      // zjistovani poradi //
             dva = 1;
         if (poradi1 > 99)
             dva = 2;
-        for (int a = 0; a < 30; a++)    // cyklus pro urceni velikosti mezery //
-            format[a] = ' ';    // uprava formatovani //
+        for (int a = 0; a < 30; a++)
+            format[a] = ' ';    // vkladani mezery do promenne //
 
         format[(30 - strlen(zamky[poradi1].nazev) - dva)] = '\0';   //vypocet znaku nulove hodnoty //
         printf("%d)  %s%s|", (poradi1 + 1), zamky[poradi1].nazev, format);    //vypis formatovane casti dat //
 
-        for (int a = 0; a < 30; a++)    // cyklus pro urceni velikosti mezery //
-            format[a] = ' ';    // uprava formatovani //
+        for (int a = 0; a < 30; a++)
+            format[a] = ' ';    // vkladani mezery do promenne //
 
         format[(30 - strlen(zamky[poradi1].misto))] = '\0';
         printf("%s%s|", zamky[poradi1].misto, format);
 
-        for (int a = 0; a < 30; a++)    // cyklus pro urceni velikosti mezery //
-            format[a] = ' ';    // uprava formatovani //
+        for (int a = 0; a < 30; a++)
+            format[a] = ' ';    // vkladani mezery do promenne //
 
         format[(8 - strlen(zamky[poradi1].cena))] = '\0';
         printf("%sKc%s|", zamky[poradi1].cena, format);
 
-        for (int a = 0; a < 30; a++)    // cyklus pro urceni velikosti mezery //
-            format[a] = ' ';    // uprava formatovani //
+        for (int a = 0; a < 30; a++)
+            format[a] = ' ';    // vkladani mezery do promenne //
 
         format[(15 - strlen(zamky[poradi1].otvdoba))] = '\0';
         printf("%s%s|\n", zamky[poradi1].otvdoba, format);
@@ -113,7 +113,7 @@ void show(int stop) // funkce pro zobrazeni a formatovani dat //
     }
 
     if (stop)
-        getche();
+        getche();   // ceka na interakci s konzoli //
 
 }
 
@@ -162,9 +162,9 @@ int vybrat()
         case konecna: return 0;
             break;
         default:system("cls"); // vycisteni konzole //
-            printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu."); // uzivateli vzdornost //
-            Sleep(2000);    // cekani, protoze muzeme //
-            menu(); // volani funkce //
+            printf("    Zadal jsi spatnou hodnotu.\n    Zkus to znovu.\n"); // uzivateli vzdornost //
+            Sleep(2000);    // cekani, nez bude zavolana a zobrazena funkce "menu" //
+            menu();
             break;  // ukonci cyklus //
         }
 
@@ -245,10 +245,10 @@ void change()
     printf("Upravuje se tento zamek/hrad:\n      %s, %s, %s, %s\n\n", zamky[radek].nazev, zamky[radek].misto, zamky[radek].cena, zamky[radek].otvdoba);   // vypis co upravujeme //
     printf("Zadejte novy nazev: ");
     scanf("%c", &temp); // vycisteni bufferu //
-    scanf("%[^\n]", zamky[radek].nazev);    // ukladani dat do promenne //
+    scanf("%[^\n]", zamky[radek].nazev);    // cteni z konzole //
     printf("Zadejte novou lokaci: ");
     scanf("%c", &temp); // vycisteni bufferu //
-    scanf("%[^\n]", zamky[radek].misto);
+    scanf("%[^\n]", zamky[radek].misto);    // cteni z konzole //
     printf("Zadejte novou cenu vstupu: ");
     scanf("%c", &temp); // vycisteni bufferu //
     scanf("%[^\n]", zamky[radek].cena); // cteni z konzole //
@@ -300,9 +300,9 @@ void del()
         {
 
             dalsi = radek + 1;
-            strcpy(zamky[radek].nazev, zamky[dalsi].nazev); // nahrazeni radku jinym //
-            strcpy(zamky[radek].misto, zamky[dalsi].misto); // nahrazeni mista jinym //
-            strcpy(zamky[radek].cena, zamky[dalsi].cena);   // nahrazeni ceny jinou //
+            strcpy(zamky[radek].nazev, zamky[dalsi].nazev); // prepsani radku jinym //
+            strcpy(zamky[radek].misto, zamky[dalsi].misto); // prepsani mista jinym //
+            strcpy(zamky[radek].cena, zamky[dalsi].cena);   // prepsani ceny jinou //
             strcpy(zamky[radek].otvdoba, zamky[dalsi].otvdoba);
 
         }
@@ -313,7 +313,7 @@ void del()
     }
 
     printf("\nChcete smazat dalsi radek?\nano/ne [a/n]\n");
-    if (getche() == 'a')    // overeni podminky //
+    if (getche() == 'a')    // overeni podminky, neceka na "enter" //
         del();  // pri splneni podminky zavolani funkce del //
 
 }
@@ -362,15 +362,15 @@ void hledat()
         {
 
             printf("%d) %s, %s, %s, %s\n", a, zamky[a].nazev, zamky[a].misto, zamky[a].cena, zamky[a].otvdoba);
-            strg = 0;
+            strg = 0;   // nastaveni hodnoty promenne //
 
         }
 
-        pismena = 0;
+        pismena = 0;    // nastaveni hodnoty //
 
     }
 
-    entr = getche();    // precte znaky v konzoli //
+    entr = getche();    // ceka na interakci s konzoli, pote prepne na vyberovou tabulku //
 
 }
 
@@ -384,7 +384,8 @@ void finboss()  // :) //
     printf("                                       \\------------------------------------/\n");
     printf("                                        \\vytvoril: Filip Zadnik a Vit Urban/\n");
     printf("                                         \\________________________________/\n");
-    Sleep(3000);
+    Sleep(3000);    // pauza pred ukoncenim programu //
+    printf("\n                                         Deithwen Addan yn Carn aep Morvudd\n");
 
 }
 
