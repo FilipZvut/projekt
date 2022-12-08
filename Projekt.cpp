@@ -2,7 +2,7 @@
 #include "Projekt.h"
 
 int main()
-{ 
+{   
     do      //cyklus volajici zakladni funkce behu programu, dokud neni zneplatnena podminka //
     {        
 
